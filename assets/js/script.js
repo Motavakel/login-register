@@ -6,6 +6,10 @@ const toastDetails = {
     icon: "fa-check-circle-o",
     text: "ورود شما با موفقیت انجام شد",
   },
+  successregister: {
+    icon: "fa-check-circle-o",
+    text: "ثبت نام شما با موفقیت انجام شد",
+  },
   successinputnumber: {
     icon: "fa-check-circle-o",
     text: "رمز یکبار مصرف با موفقیت ارسال شد",
