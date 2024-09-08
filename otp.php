@@ -14,15 +14,26 @@
     <div class="container" id="container">
         <div class="otp-class">
             <form method="POST" action="functions/otp-funcs.php" style="width:75%">
-                <?php if (isset($_GET['signin']) && $_GET['signin'] == 'successinputnumber'): ?>
-                <h3>کد یکبار مصرف دریافتی را در فیلد زیر وارد کنید</h3>
-                <input required name="phonenumber" type="text" pattern="[0-9]{4}" placeholder="کد تایید">
-                <button name="signin">ارسال</button>
+                <?php if (isset($_GET['status']) && ($_GET['status'] == 'successinputnumber'||$_GET['status'] == 'errorinotpsignin')): ?>
+
+
+                <h3 style="margin-bottom:20px">کد یکبار مصرف دریافتی را در فیلد زیر وارد کنید</h3>
+                <input required name="random-number" type="text" pattern="[0-9]{4}" placeholder="کد تایید" oninvalid="setCustomValidity('لطفاً کد ارسالی را وارد نمایید')">
+                <input hidden name="phone" value="<?php echo $_GET['phone']?>"/>
+                <button name="send-random">ارسال</button>
+
+
                 <?php else: ?>
+
+
+
                 <h1>فراموشی رمز</h1>
                 <span>شماره همراه تان را وارد نمایید</span>
-                <input required name="phonenumber" type="tel" pattern="[0-9]{11}" placeholder="شماره همراه">
-                <button name="signin">ارسال کد</button>
+                <input required name="phonenumber" type="tel" pattern="[0-9]{11}" placeholder="شماره همراه" oninvalid="setCustomValidity('لطفاً شماره موبایل تان را وارد نمایید')">
+                <button name="forget-password">ارسال کد</button>
+
+
+
                 <?php endif; ?>
             </form>
         </div>

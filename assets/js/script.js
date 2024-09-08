@@ -14,13 +14,25 @@ const toastDetails = {
     icon: "fa-check-circle-o",
     text: "رمز یکبار مصرف با موفقیت ارسال شد",
   },
+  successinotpsignin: {
+    icon: "fa-check-circle-o",
+    text: "ورود شما با موفقیت انجام شد",
+  },
   errorinputnumber: {
     icon: "fa-times-circle-o",
     text: "این شماره قبلا در سامانه ثبت نشده است",
   },
+  errornotinum: {
+    icon: "fa-times-circle-o",
+    text: "لطفا شماره همراه تان صورت لاتین وارد کنید",
+  },
   error: {
     icon: "fa-times-circle-o",
     text: "لطفا در وارد کردن اطلاعات دقت نمایید",
+  },
+  errorinotpsignin: {
+    icon: "fa-times-circle-o",
+    text: "رمز پیامکی صحیح نمی باشد",
   },
 };
 const removeToast = (toast) => {

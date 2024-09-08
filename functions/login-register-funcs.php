@@ -41,7 +41,7 @@ if (isset($_POST['signup'])) {
         try {
             //query
             $query = "SELECT * FROM users WHERE(username=:key OR phone=:key) AND (`password`=:password) LIMIT 1";
-
+            
             //statment
 
             $stmp = $connection->prepare($query);
