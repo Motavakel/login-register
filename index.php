@@ -19,10 +19,10 @@ include 'config/loader.php'
         <div class="form-container sign-up">
             <form method="POST" action="functions/login-register-funcs.php">
                 <h1>ایجاد حساب</h1>
-                <input name="name" type="text" placeholder="نام و نام خانوداگی به فارسی وارد کنید"  required oninvalid="setCustomValidity('لطفاً نام و نام خانوادگی تان را وارد نمایید')">
-                <input name="user_name" type="text" placeholder="نام کاربری را به لاتین وارد کنید" required oninvalid="setCustomValidity('لطفاً نام کاربری تان را وارد نمایید')">
-                <input name="phone" type="tel" pattern="[0-9]{11}" placeholder="شماره موبایل را به لاتین وارد کنید" required oninvalid="setCustomValidity('لطفاً شماره موبایل تان را وارد نمایید')">
-                <input name="password" type="password" placeholder="رمز عبور" required oninvalid="setCustomValidity('لطفاً رمز عبور را وارد نمایید')"> 
+                <input name="name" type="text" placeholder="نام و نام خانوداگی به فارسی وارد کنید">
+                <input name="user_name" type="text" placeholder="نام کاربری را به لاتین وارد کنید" required>
+                <input name="phone" type="tel" pattern="[0-9]{11}" placeholder="شماره موبایل را به لاتین وارد کنید" required>
+                <input name="password" type="password" placeholder="رمز عبور" required> 
                 <button name="signup">ثبت نام</button>
             </form>
         </div>
@@ -30,8 +30,8 @@ include 'config/loader.php'
             <form method="POST" action="functions/login-register-funcs.php">
                 <h1>ورود</h1>
                 <span>برای ورود اطلاعات خودتان را وارد کنید</span>
-                <input name="key" type="text" placeholder="نام کاربری یا شماره موبایل "required oninvalid="setCustomValidity('لطفاً نام کاربری یا شماره موبایل تان را وارد نمایید')">
-                <input name="password" type="password" placeholder="پسورد"required oninvalid="setCustomValidity('لطفاً رمز عبورتان را وارد نمایید')">
+                <input name="key" type="text" placeholder="نام کاربری یا شماره موبایل "required>
+                <input name="password" type="password" placeholder="پسورد"required>
                 <a href="otp.php">رمزتان را فراموش کرده اید؟</a>
                 <button name="signin">ورود</button>
             </form>
