@@ -16,12 +16,9 @@ if (isset($_POST['signup'])) {
 
         if ($is_name_ok && $is_phone_ok && $is_username_ok) {
             try {
-                //query
                 $query   = "INSERT INTO users (`name`,username,phone,`password`) VALUES (?,?,?,?); ";
-                //statment
                 $stmt   = $connection->prepare($query);
                 $stmt->execute([$name, $username, $phone, $pass]);
-                //redirect
                 header('Location: ../index.php?status=successregister');
             } catch (PDOException $e) {
                 die('Error : ' . $e->getMessage());
@@ -39,17 +36,14 @@ if (isset($_POST['signup'])) {
         $pass = $_POST['password'];
 
         try {
-            //query
             $query = "SELECT * FROM users WHERE(username=:key OR phone=:key) AND (`password`=:password) LIMIT 1";
             
-            //statment
 
             $stmp = $connection->prepare($query);
             $stmp->bindValue(":key", $key);
             $stmp->bindValue(":password", $pass);
             $stmp->execute();
 
-            //resulat
             $result = $stmp->fetch(PDO::FETCH_ASSOC);
             $result_count = $stmp->rowCount();
 

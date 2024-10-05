@@ -9,46 +9,44 @@ if (isset($_POST['forget-password'])) {
 
         if ($is_phone_ok) {
             $phone = $_POST['phonenumber'];
-            //query
-            $query = "SELECT * FROM users WHERE(phone=:key) LIMIT 1";
+            $query = "SELECT * FROM users WHERE phone = :key LIMIT 1";
 
-            //statment
             $stmp = $connection->prepare($query);
             $stmp->bindValue(":key", $phone);
             $stmp->execute();
 
-            //resulat
             $result = $stmp->fetch(PDO::FETCH_ASSOC);
             $result_count = $stmp->rowCount();
 
-            echo $result_count;
             if ($result_count === 1) {
-
                 $random = sendRegisterCode($phone);
+
                 $query = "UPDATE users SET code = :code WHERE phone = :phone";
                 $stmp = $connection->prepare($query);
                 $stmp->bindParam(":code", $random);
                 $stmp->bindParam(":phone", $phone);
-                $stmp->execute();
-
-                header('Location: ../otp.php?status=successinputnumber&phone=' . $phone);
+                
+                if ($stmp->execute()) {
+                    redirect('../otp.php', ['status' => 'successinputnumber', 'phone' => $phone]);
+                } else {
+                    redirect('../otp.php', ['status' => 'errorinotpsignin']);
+                }
             } else {
-                header('Location: ../otp.php?status=errorinputnumber');
+                redirect('../otp.php', ['status' => 'errorinputnumber']);
             }
         } else {
-            header('Location: ../otp.php?status=errornotinum');
+            redirect('../otp.php', ['status' => 'errornotinum']);
         }
     } else {
-        header('Location: ../otp.php?status=errornotinum');
+        redirect('../otp.php', ['status' => 'errornotinum']);
     }
 } elseif (isset($_POST['send-random'])) {
-    $phone  = $_POST['phone'];
+    $phone = $_POST['phone'];
 
     if (isset($_POST['random-number'])) {
         $is_random_ok = preg_match('/^[\d]{4}$/', $_POST['random-number']);
         if ($is_random_ok) {
-
-            $code  = $_POST['random-number'];
+            $code = $_POST['random-number'];
 
             $query = "SELECT code FROM users WHERE phone = :phone";
             $stmp = $connection->prepare($query);
@@ -57,27 +55,29 @@ if (isset($_POST['forget-password'])) {
 
             $result = $stmp->fetch(PDO::FETCH_ASSOC);
 
-            if($result['code'] == $code){
-                header('Location:../index.php?status=successinotpsignin');
-            }else{
-                header('Location:../otp.php?status=errorinotpsignin&phone=' . $phone);
+            if ($result && $result['code'] == $code) {
+                redirect('../index.php', ['status' => 'successinotpsignin']);
+            } else {
+                redirect('../otp.php', ['status' => 'errorinotpsignin', 'phone' => $phone]);
             }
         }
     }
 }
 
-function sendRegisterCode($phone)
-{
+function sendRegisterCode($phone) {
+    $randomN = rand(1000, 9999);
+    $random = strval($randomN);
 
-    $randomN  = rand(1000, 9999);
-    //در صورت ارسال دیتا تایپ عددی سامانه ملی پیامک خطا می دهد و قبول نمیکند. به همین دلیل در به قالب رشته تبدیل می کنیم
-    $random  = strval($randomN);
-    $query = "insert into users code values ? where phone=?";
+    //برای اتصال از سامانه ملی پیامک اضافه شده است
+    //این سامانه یک اندپوینت ای پی آی در اختیارتان قرار می دهد که می توانید 
+    //برای ورودی 
+    //url
+    //آن را وارد کنید
     include 'otp-account.php';
 
-    /*  $data = array('bodyId' => 242394, 'to' => $phone, 'args' => [$random]);
+    
+    $data = array('bodyId' => 242394, 'to' => $phone, 'args' => [$random]);
     $data_string = json_encode($data);
-
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -92,10 +92,20 @@ function sendRegisterCode($phone)
             'Content-Length: ' . strlen($data_string)
         )
     );
+
     $result = curl_exec($ch);
-    curl_close($ch);
     if (curl_errno($ch)) {
         echo 'Curl error: ' . curl_error($ch);
-    } */
+    }
+
+    curl_close($ch);
     return $random;
+}
+
+function redirect($url, $params = []) {
+    if (!empty($params)) {
+        $url .= '?' . http_build_query($params);
+    }
+    header('Location: ' . $url);
+    exit();
 }
