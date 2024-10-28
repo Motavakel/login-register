@@ -10,6 +10,11 @@ if (isset($_POST['signup'])) {
         $phone      = $_POST['phone'];
         $pass       = $_POST['password'];
 
+        if(strlen($pass) < 8){
+            header('Location: ../index.php?status=simplepassworderror');
+            exit();
+        }
+
         $is_name_ok     = preg_match('/^[آ-ی]+/', $name);
         $is_username_ok = preg_match('/^[a-zA-z_\d-]+$/', $username);
         $is_phone_ok    = preg_match('/^0[\d]{10}$/', $phone);
@@ -33,6 +38,7 @@ if (isset($_POST['signup'])) {
 
     if (isset($_POST['key']) && isset($_POST['password'])) {
         $key  = $_POST['key'];
+        
         $pass = $_POST['password'];
 
         try {

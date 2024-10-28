@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'config/loader.php'
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ include 'config/loader.php'
                 <input name="name" type="text" placeholder="نام و نام خانوداگی به فارسی وارد کنید">
                 <input name="user_name" type="text" placeholder="نام کاربری را به لاتین وارد کنید" required>
                 <input name="phone" type="tel" pattern="[0-9]{11}" placeholder="شماره موبایل را به لاتین وارد کنید" required>
-                <input name="password" type="password" placeholder="رمز عبور" required> 
+                <input name="password" type="password" placeholder="پسورد حداقل شامل ۸ کاراکتر باشد" required>
                 <button name="signup">ثبت نام</button>
             </form>
         </div>
@@ -30,8 +30,13 @@ include 'config/loader.php'
             <form method="POST" action="functions/login-register-funcs.php">
                 <h1>ورود</h1>
                 <span>برای ورود اطلاعات خودتان را وارد کنید</span>
-                <input name="key" type="text" placeholder="نام کاربری یا شماره موبایل "required>
-                <input name="password" type="password" placeholder="پسورد"required>
+                <input name="key" type="text" placeholder="نام کاربری یا شماره موبایل " required>
+
+                <div class="password-container">
+                    <input id="password" name="password" type="password" placeholder="پسورد" required>
+                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                </div>
+                
                 <a href="otp.php">رمزتان را فراموش کرده اید؟</a>
                 <button name="signin">ورود</button>
             </form>

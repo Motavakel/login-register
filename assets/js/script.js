@@ -26,6 +26,10 @@ const toastDetails = {
     icon: "fa-times-circle-o",
     text: "لطفا شماره همراه تان صورت لاتین وارد کنید",
   },
+  simplepassworderror: {
+    icon: "fa-times-circle-o",
+    text: "پسورد حداقل باید شامل ۸ کاراکتر باشد",
+  },
   error: {
     icon: "fa-times-circle-o",
     text: "لطفا در وارد کردن اطلاعات دقت نمایید",
@@ -56,7 +60,7 @@ const createToast = (id) => {
   toast.timeoutId = setTimeout(() => removeToast(toast), toastDetails.timer);
 };
 
-//برای دریافت حالت نمایش تست با استفاده از کوئری استرینگ
+/* To receive the display mode of the test using a query string */
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
@@ -65,12 +69,10 @@ let value = params.status;
 if(value){
   createToast(value);
 }
-
 /* ---------------------------------------------------------- */
-
-const container = document.getElementById("container");
+const container   = document.getElementById("container");
 const registerBtn = document.getElementById("register");
-const loginBtn = document.getElementById("login");
+const loginBtn    = document.getElementById("login");
 
 registerBtn.addEventListener("click", () => {
   container.classList.add("active");
@@ -80,3 +82,18 @@ loginBtn.addEventListener("click", () => {
   container.classList.remove("active");
 });
 
+
+/* PASSWORD SECTION DISPLAY */
+function togglePassword(){
+
+  const passwordInput   = document.getElementById('password');
+  const togglePassword  = document.querySelector('.toggle-password');
+
+  if(passwordInput.type === 'password'){
+    passwordInput.type = 'text';
+    togglePassword.textContent = '🙈';
+  }else{
+    passwordInput.type = 'password';
+    togglePassword.textContent = '👁️';
+  }
+}

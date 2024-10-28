@@ -237,6 +237,19 @@ body {
   transform: translateX(200%);
 }
 
+.password-container {
+	position: relative;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+.toggle-password {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
 /* ------------------------------------------------ */
 
 
