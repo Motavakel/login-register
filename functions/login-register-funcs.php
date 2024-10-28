@@ -3,15 +3,21 @@
 require_once '../config/loader.php';
 
 if (isset($_POST['signup'])) {
-    if (isset($_POST['name']) && isset($_POST['user_name']) && isset($_POST['phone']) && isset($_POST['password'])) {
+    if (isset($_POST['name']) && isset($_POST['user_name']) 
+    && isset($_POST['phone']) && isset($_POST['password'])
+    && isset($_POST['confirm_password'])) {
 
-        $name       = $_POST['name'];
-        $username   = $_POST['user_name'];
-        $phone      = $_POST['phone'];
-        $pass       = $_POST['password'];
+        $name               = $_POST['name'];
+        $username           = $_POST['user_name'];
+        $phone              = $_POST['phone'];
+        $pass               = $_POST['password'];
+        $confirm_pass       = $_POST['confirm_password'];
 
         if(strlen($pass) < 8){
             header('Location: ../index.php?status=simplepassworderror');
+            exit();
+        }elseif($confirm_pass !== $pass){
+            header('Location: ../index.php?status=notconfirmpassworderror');
             exit();
         }
 

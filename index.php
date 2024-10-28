@@ -19,10 +19,11 @@ include 'config/loader.php'
         <div class="form-container sign-up">
             <form method="POST" action="functions/login-register-funcs.php">
                 <h1>ایجاد حساب</h1>
-                <input name="name" type="text" placeholder="نام و نام خانوداگی به فارسی وارد کنید">
-                <input name="user_name" type="text" placeholder="نام کاربری را به لاتین وارد کنید" required>
-                <input name="phone" type="tel" pattern="[0-9]{11}" placeholder="شماره موبایل را به لاتین وارد کنید" required>
-                <input name="password" type="password" placeholder="پسورد حداقل شامل ۸ کاراکتر باشد" required>
+                <input  name="name" type="text" placeholder="نام و نام خانوداگی به فارسی وارد کنید">
+                <input  name="user_name" type="text" placeholder="نام کاربری را به لاتین وارد کنید" required>
+                <input  name="phone" type="tel" pattern="[0-9]{11}" placeholder="شماره موبایل را به لاتین وارد کنید" required>
+                <input  name="password" type="password" placeholder="پسورد حداقل شامل ۸ کاراکتر باشد" required>
+                <input  name="confirm_password" type="password" placeholder="تکرار دوباره پسورد" required>
                 <button name="signup">ثبت نام</button>
             </form>
         </div>

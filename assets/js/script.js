@@ -38,7 +38,12 @@ const toastDetails = {
     icon: "fa-times-circle-o",
     text: "رمز پیامکی صحیح نمی باشد",
   },
+  notconfirmpassworderror: {
+    icon: "fa-times-circle-o",
+    text: "عدم تطابق رمز ورودی",
+  },
 };
+
 const removeToast = (toast) => {
   toast.classList.add("hide");
   if (toast.timeoutId) clearTimeout(toast.timeoutId);
@@ -46,7 +51,7 @@ const removeToast = (toast) => {
 };
 
 const createToast = (id) => {
-  console,console.log(id);
+  console.log(id);
   
   const { icon, text } = toastDetails[id];
   const toast = document.createElement("li");
@@ -55,20 +60,22 @@ const createToast = (id) => {
                          <span>${text}</span>
                          <i class="fa ${icon}"></i>
                       </div>
-                      <i class="fa-solid fa-xmark" onclick="removeToast(this.parentElement)"></i>`;
+                      <i class="fa-solid fa-xmark"></i>`;
   notifications.appendChild(toast);
+  toast.querySelector('.fa-solid.fa-xmark').addEventListener('click', () => removeToast(toast));
   toast.timeoutId = setTimeout(() => removeToast(toast), toastDetails.timer);
 };
 
-/* To receive the display mode of the test using a query string */
+// To receive the display mode of the test using a query string
 const params = new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, prop) => searchParams.get(prop),
 });
 
-let value = params.status;
-if(value){
-  createToast(value);
+let id = params.status;
+if (id) {
+  createToast(id);
 }
+
 /* ---------------------------------------------------------- */
 const container   = document.getElementById("container");
 const registerBtn = document.getElementById("register");
