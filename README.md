@@ -1,6 +1,11 @@
 ![PHP Version](https://img.shields.io/badge/PHP-7.0%20or%20higher%20-gold)
 ![PDO](https://img.shields.io/badge/PDO-Required-blue)
 ![MySQL](https://img.shields.io/badge/MySQL-DBMS-red)
+
+# SMS registration system
+
+This project is an SMS registration system that allows users to register in the system using their phone numbers. The system is designed to manage the registration process and password recovery, and includes the following features:
+
 # سامانه ثبت‌نام پیامکی
 
 این پروژه یک سامانه ثبت‌نام پیامکی است که به کاربران امکان می‌دهد با استفاده از شماره تلفن خود، در سیستم ثبت‌نام کنند. این سامانه برای مدیریت فرآیند ثبت‌نام و بازیابی رمز عبور طراحی شده است و شامل امکانات زیر می‌باشد:
